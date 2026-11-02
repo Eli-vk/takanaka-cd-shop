@@ -5,62 +5,92 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>TAKANAKA CD SHOP</title>
 <style>
-:root{--navy:#12394b;--cream:#fff3dc;--orange:#ef7548;--gold:#ffd36c;--aqua:#75cbd1}
+:root{--navy:#20212b;--cream:#f5efd9;--orange:#e95c35;--gold:#f2d99a;--teal:#54a6a0}
 *{box-sizing:border-box}
-body{margin:0;background:var(--cream);color:var(--navy);font-family:Arial,Helvetica,sans-serif}
-header{background:var(--navy);color:white;text-align:center;padding:22px 12px;letter-spacing:5px;font-weight:800}
-.hero{padding:76px 20px;text-align:center;background:linear-gradient(130deg,var(--orange),var(--gold),var(--aqua))}
-.hero .eyebrow{letter-spacing:4px;font-weight:bold;font-size:12px}
-.hero h1{font-size:clamp(38px,8vw,76px);margin:18px 0}
-.hero p{font-size:18px}
-main{max-width:1100px;margin:auto;padding:34px 20px}
+body{margin:0;color:var(--navy);font-family:Arial,Helvetica,sans-serif;background:
+linear-gradient(rgba(18,24,39,.82),rgba(18,24,39,.86)),
+url('images/takanaka-live.jpeg') center top/cover fixed}
+header{position:relative;min-height:190px;display:flex;align-items:center;justify-content:center;
+background:linear-gradient(90deg,rgba(12,19,34,.78),rgba(12,19,34,.2),rgba(12,19,34,.78)),
+url('images/takanaka-red-guitar.jpeg') center 42%/cover;color:#fff;text-align:center;
+padding:38px 14px;letter-spacing:6px;font-weight:900;font-size:clamp(25px,5vw,42px);
+text-shadow:0 3px 12px #000; border-bottom:5px solid #ef7044}
+
+.hero{position:relative;min-height:410px;display:grid;grid-template-columns:1fr 1fr;align-items:center;gap:28px;padding:42px max(5vw,22px);background:linear-gradient(100deg,rgba(13,24,42,.92),rgba(13,24,42,.42)),url('images/takanaka-live.jpeg') center 42%/cover;color:#fff;border-bottom:5px solid var(--orange)}
+.hero-copy{position:relative;z-index:1}
+.eyebrow{font-size:12px;letter-spacing:4px;font-weight:800}
+.hero h1{font-size:clamp(40px,6vw,76px);line-height:.95;margin:18px 0}
+.hero p{font-size:18px;line-height:1.5}
+.hero-photo{width:100%;height:330px;object-fit:cover;object-position:center;border:8px solid var(--cream);box-shadow:10px 12px 0 #20212b35}
+main{max-width:1150px;margin:28px auto;padding:34px 20px;background:rgba(248,242,222,.96);box-shadow:0 12px 45px #0006}
+.photo-section{margin:15px 0 42px}
+.photo-section h2,.toolbar h2{letter-spacing:3px}
+.photo-grid{display:grid;grid-template-columns:1fr 1fr;gap:18px}
+.photo-grid img{width:100%;height:270px;object-fit:cover;display:block;border:7px solid white;box-shadow:0 5px 18px #20212b20}
 .toolbar{display:flex;gap:12px;flex-wrap:wrap;align-items:center;justify-content:space-between}
-input{padding:13px 15px;border:1px solid #b9c4c1;border-radius:4px;font-size:16px;width:min(100%,400px)}
-.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(210px,1fr));gap:20px;margin-top:26px}
-.card{background:white;padding:15px;border:1px solid #eadfc9;box-shadow:0 4px 14px #12394b12}
-.cover{aspect-ratio:1;background:linear-gradient(145deg,#f47743,#183d5b);display:flex;flex-direction:column;justify-content:center;align-items:center;text-align:center;color:white;padding:18px}
+input{padding:13px 15px;border:1px solid #aaa;border-radius:3px;font-size:16px;width:min(100%,400px)}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(205px,1fr));gap:20px;margin-top:26px}
+.card{background:#fffdf6;padding:15px;border:1px solid #e2d8c3;box-shadow:0 4px 14px #20212b22}
+.cover{aspect-ratio:1;background:linear-gradient(145deg,#ef7548,#203f5a);display:flex;flex-direction:column;justify-content:center;align-items:center;text-align:center;color:white;padding:18px;position:relative;overflow:hidden}
+.cover:before{content:"";position:absolute;width:180%;height:45%;background:#f2d99a55;transform:rotate(-35deg)}
+.cover small,.cover strong{position:relative;z-index:1}
 .cover small{letter-spacing:3px;font-weight:bold}
-.cover strong{font-size:24px;margin:18px 0}
-.card h3{min-height:42px}
+.cover strong{font-size:23px;margin:18px 0}
+.card h3{min-height:40px}
 .price{font-size:20px;font-weight:bold}
 button{background:var(--orange);color:white;border:0;padding:12px 16px;font-weight:bold;cursor:pointer;border-radius:3px}
 button:hover{filter:brightness(.92)}
-.cart{background:var(--navy);color:white;padding:22px;margin-top:38px}
+.cart{background:linear-gradient(135deg,#182b43,#253b54 55%,#a8462d);color:white;padding:22px;margin-top:38px;border:2px solid #e6bd74;box-shadow:0 8px 22px #0002}
 .cart h2{margin-top:0}
-.cart button{background:var(--gold);color:var(--navy)}
-.qty-controls{display:flex;align-items:center;gap:10px;margin:10px 0}
-.qty-controls button{padding:6px 11px}
-.cart-line{padding:8px 0;border-bottom:1px solid #ffffff33}
-.hero{position:relative;overflow:hidden}
-.hero:after{content:"〰  ✦  〰";display:block;font-size:30px;letter-spacing:14px;margin-top:20px;color:#173b4a}
-.note{font-size:13px;line-height:1.6;color:#59666a;margin-top:22px}
-footer{background:var(--navy);color:white;text-align:center;padding:30px;margin-top:45px;letter-spacing:2px}
-@media(max-width:520px){.hero{padding:55px 16px}.toolbar{align-items:stretch}input{width:100%}}
+.cart button{background:var(--gold);color:var(--navy);padding:8px 12px}\n#buy-now{background:#f16b42;color:white;padding:13px 22px;margin:12px 0 0;font-size:16px;letter-spacing:1px;border:2px solid #ffd58a}\n#buy-now:disabled{opacity:.55;cursor:not-allowed}
+.qty-controls{display:flex;align-items:center;gap:10px;margin:8px 0}
+.cart-line{padding:8px 0;border-bottom:1px solid #ffffff35}
+.note{font-size:13px;line-height:1.6;color:#626262;margin-top:22px}
+footer{background:var(--navy);color:var(--cream);text-align:center;padding:30px;margin-top:45px;letter-spacing:2px}
+@media(max-width:700px){.hero{grid-template-columns:1fr;padding:42px 20px}.hero-photo{height:250px}.photo-grid{grid-template-columns:1fr}.photo-grid img{height:auto;max-height:300px}.hero h1{font-size:48px}}
 </style>
 </head>
 <body>
 <header>TAKANAKA CD SHOP</header>
+
 <section class="hero">
-  <div class="eyebrow">JAPANESE GUITAR • CITY POP • SUNSET SOUNDS</div>
-  <h1>SUMMER SOUNDS FOREVER.</h1>
-  <p>A fan-made catalog celebrating Masayoshi Takanaka</p>
-  <strong>$10 PER CD&nbsp; | &nbsp;$1.99 FLAT SHIPPING</strong>
+  <div class="hero-copy">
+    <div class="eyebrow">JAPANESE GUITAR • CITY POP • SUNSET SOUNDS</div>
+    <h1>SUMMER<br>SOUNDS<br>FOREVER.</h1>
+    <p>A fan-made catalog celebrating Masayoshi Takanaka.</p>
+    <strong>$10 PER CD&nbsp; | &nbsp;$1.99 FLAT SHIPPING</strong>
+  </div>
+  <img class="hero-photo" src="images/takanaka-red-guitar.jpeg" alt="Masayoshi Takanaka holding his red guitar">
 </section>
+
 <main>
+  <section class="photo-section">
+    <h2>ON STAGE</h2>
+    <div class="photo-grid">
+      <img src="images/takanaka-live.jpeg" alt="Masayoshi Takanaka performing live with his red guitar">
+      <img src="images/takanaka-red-guitar.jpeg" alt="Masayoshi Takanaka with his red guitar">
+    </div>
+  </section>
+
   <div class="toolbar">
     <div><h2>THE ALBUM COLLECTION</h2><p>Explore the studio-album catalog.</p></div>
-    <input id="search" type="search" placeholder="Search albums..." oninput="render()">
+    <input id="search" type="search" placeholder="Search albums..." aria-label="Search albums">
   </div>
   <div class="grid" id="albums"></div>
+
   <section class="cart">
     <h2>YOUR CART</h2>
     <div id="cart">Your cart is empty.</div>
     <p id="total"></p>
-    <button type="button" onclick="clearCart()">CLEAR CART</button>
+    <button type="button" id="clear-cart">CLEAR CART</button>
+    <button type="button" id="buy-now">BUY NOW</button>
+    <p id="checkout-message" aria-live="polite" style="font-size:13px;line-height:1.5"></p>
   </section>
-  <p class="note">Catalog prototype only. The graphic covers are placeholders, not official album artwork. This site does not take payments or submit orders. Before selling CDs, confirm that you have the necessary commercial rights to the recordings and artwork. A secure checkout and adult-managed payment account must be connected separately.</p>
+
+  <p class="note">Checkout is not connected yet. The BUY NOW button is a setup notice, not a live payment. Before taking orders, confirm that you have permission to reproduce and sell the recordings and artwork, and have a parent or guardian set up and manage a legitimate payment processor. Album tiles are original placeholders until approved cover images are added.</p>
 </main>
 <footer>TAKANAKA CD SHOP<br><small>INDEPENDENT FAN CATALOG CONCEPT</small></footer>
+
 <script>
 const records=[
 ["SEYCHELLES",1976],["TAKANAKA",1977],["AN INSATIABLE HIGH",1977],
@@ -74,37 +104,30 @@ const records=[
 ["THE WHITE GOBLIN",2004],["40年目の虹",2011]
 ];
 let cart={};
-function add(name){cart[name]=(cart[name]||0)+1;updateCart();}
-function changeQty(name,delta){cart[name]=(cart[name]||0)+delta;if(cart[name]<=0)delete cart[name];updateCart();}
-function clearCart(){cart={};updateCart();}
+function add(name){cart[name]=(cart[name]||0)+1;updateCart()}
+function changeQty(name,delta){cart[name]=(cart[name]||0)+delta;if(cart[name]<=0)delete cart[name];updateCart()}
+function clearCart(){cart={};updateCart()}
 function updateCart(){
- const cartBox=document.getElementById('cart');
- const totalBox=document.getElementById('total');
- const items=Object.entries(cart);
- const count=items.reduce((n,item)=>n+item[1],0);
- const subtotal=count*10;
- const shipping=count>0?1.99:0;
- if(count===0){cartBox.textContent='Your cart is empty.';totalBox.textContent='';return;}
- cartBox.innerHTML=items.map(([name,qty])=>`<div class="cart-line"><strong>${name}</strong><div class="qty-controls"><button type="button" aria-label="Remove one ${name}" data-action="minus" data-name="${encodeURIComponent(name)}">−</button><span>Qty: ${qty}</span><button type="button" aria-label="Add one ${name}" data-action="plus" data-name="${encodeURIComponent(name)}">+</button></div></div>`).join('');
+ const box=document.getElementById('cart'),totalBox=document.getElementById('total');
+ const items=Object.entries(cart),count=items.reduce((n,item)=>n+item[1],0);
+ const subtotal=count*10,shipping=count?1.99:0;
+ if(!count){box.textContent='Your cart is empty.';totalBox.textContent='';return}
+ box.innerHTML=items.map(([name,qty])=>`<div class="cart-line"><strong>${name}</strong><div class="qty-controls"><button type="button" data-action="minus" data-name="${encodeURIComponent(name)}">−</button><span>Qty: ${qty}</span><button type="button" data-action="plus" data-name="${encodeURIComponent(name)}">+</button></div></div>`).join('');
  totalBox.innerHTML=`Subtotal: $${subtotal.toFixed(2)}<br>Shipping: $${shipping.toFixed(2)}<br><strong>Total: $${(subtotal+shipping).toFixed(2)}</strong>`;
 }
 function render(){
  const q=document.getElementById('search').value.toLowerCase();
- const filtered=records.filter(a=>a[0].toLowerCase().includes(q));
- document.getElementById('albums').innerHTML=filtered.map(([name,year])=>`<article class="card"><div class="cover"><small>MASAYOSHI TAKANAKA</small><strong>${name}</strong><small>${year}</small></div><h3>${name}</h3><div class="price">$10.00</div><p><button type="button" class="add-button" data-name="${encodeURIComponent(name)}">ADD TO CART</button></p></article>`).join('');
+ document.getElementById('albums').innerHTML=records.filter(a=>a[0].toLowerCase().includes(q)).map(([name,year])=>`
+ <article class="card"><div class="cover"><small>MASAYOSHI TAKANAKA</small><strong>${name}</strong><small>${year}</small></div>
+ <h3>${name}</h3><div class="price">$10.00</div><p><button type="button" class="add-button" data-name="${encodeURIComponent(name)}">ADD TO CART</button></p></article>`).join('');
 }
-document.getElementById('albums').addEventListener('click',event=>{
- const button=event.target.closest('.add-button');
- if(!button)return;
- add(decodeURIComponent(button.dataset.name));
- button.textContent='ADDED ✓';
- setTimeout(()=>{if(button.isConnected)button.textContent='ADD TO CART';},900);
-});
-document.getElementById('cart').addEventListener('click',event=>{
- const button=event.target.closest('button[data-action]');
- if(!button)return;
- const name=decodeURIComponent(button.dataset.name);
- changeQty(name,button.dataset.action==='plus'?1:-1);
+document.getElementById('albums').addEventListener('click',e=>{const b=e.target.closest('.add-button');if(!b)return;add(decodeURIComponent(b.dataset.name));b.textContent='ADDED ✓';setTimeout(()=>{if(b.isConnected)b.textContent='ADD TO CART'},850)});
+document.getElementById('cart').addEventListener('click',e=>{const b=e.target.closest('button[data-action]');if(!b)return;changeQty(decodeURIComponent(b.dataset.name),b.dataset.action==='plus'?1:-1)});
+document.getElementById('clear-cart').addEventListener('click',clearCart);
+document.getElementById('buy-now').addEventListener('click',()=>{
+ const msg=document.getElementById('checkout-message');
+ if(!Object.keys(cart).length){msg.textContent='Add an album to your cart first.';return;}
+ msg.textContent='Your cart is ready, but secure checkout has not been connected. A parent or guardian must set up the payment account, and you must have the rights to sell these CDs, before real payments can be accepted.';
 });
 document.getElementById('search').addEventListener('input',render);
 render();updateCart();

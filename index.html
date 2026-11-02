@@ -28,6 +28,11 @@ button:hover{filter:brightness(.92)}
 .cart{background:var(--navy);color:white;padding:22px;margin-top:38px}
 .cart h2{margin-top:0}
 .cart button{background:var(--gold);color:var(--navy)}
+.qty-controls{display:flex;align-items:center;gap:10px;margin:10px 0}
+.qty-controls button{padding:6px 11px}
+.cart-line{padding:8px 0;border-bottom:1px solid #ffffff33}
+.hero{position:relative;overflow:hidden}
+.hero:after{content:"〰  ✦  〰";display:block;font-size:30px;letter-spacing:14px;margin-top:20px;color:#173b4a}
 .note{font-size:13px;line-height:1.6;color:#59666a;margin-top:22px}
 footer{background:var(--navy);color:white;text-align:center;padding:30px;margin-top:45px;letter-spacing:2px}
 @media(max-width:520px){.hero{padding:55px 16px}.toolbar{align-items:stretch}input{width:100%}}
@@ -51,7 +56,7 @@ footer{background:var(--navy);color:white;text-align:center;padding:30px;margin-
     <h2>YOUR CART</h2>
     <div id="cart">Your cart is empty.</div>
     <p id="total"></p>
-    <button onclick="clearCart()">CLEAR CART</button>
+    <button type="button" onclick="clearCart()">CLEAR CART</button>
   </section>
   <p class="note">Catalog prototype only. The graphic covers are placeholders, not official album artwork. This site does not take payments or submit orders. Before selling CDs, confirm that you have the necessary commercial rights to the recordings and artwork. A secure checkout and adult-managed payment account must be connected separately.</p>
 </main>
@@ -69,22 +74,39 @@ const records=[
 ["THE WHITE GOBLIN",2004],["40年目の虹",2011]
 ];
 let cart={};
-function add(name){cart[name]=(cart[name]||0)+1;updateCart()}
-function clearCart(){cart={};updateCart()}
+function add(name){cart[name]=(cart[name]||0)+1;updateCart();}
+function changeQty(name,delta){cart[name]=(cart[name]||0)+delta;if(cart[name]<=0)delete cart[name];updateCart();}
+function clearCart(){cart={};updateCart();}
 function updateCart(){
- const items=Object.entries(cart), count=items.reduce((n,x)=>n+x[1],0);
- const subtotal=count*10, shipping=count?1.99:0;
- document.getElementById("cart").innerHTML=count?items.map(([name,qty])=>`${name} × ${qty}`).join("<br>"):"Your cart is empty.";
- document.getElementById("total").innerHTML=count?`Subtotal: $${subtotal.toFixed(2)}<br>Shipping: $${shipping.toFixed(2)}<br><strong>Total: $${(subtotal+shipping).toFixed(2)}</strong>`:"";
+ const cartBox=document.getElementById('cart');
+ const totalBox=document.getElementById('total');
+ const items=Object.entries(cart);
+ const count=items.reduce((n,item)=>n+item[1],0);
+ const subtotal=count*10;
+ const shipping=count>0?1.99:0;
+ if(count===0){cartBox.textContent='Your cart is empty.';totalBox.textContent='';return;}
+ cartBox.innerHTML=items.map(([name,qty])=>`<div class="cart-line"><strong>${name}</strong><div class="qty-controls"><button type="button" aria-label="Remove one ${name}" data-action="minus" data-name="${encodeURIComponent(name)}">−</button><span>Qty: ${qty}</span><button type="button" aria-label="Add one ${name}" data-action="plus" data-name="${encodeURIComponent(name)}">+</button></div></div>`).join('');
+ totalBox.innerHTML=`Subtotal: $${subtotal.toFixed(2)}<br>Shipping: $${shipping.toFixed(2)}<br><strong>Total: $${(subtotal+shipping).toFixed(2)}</strong>`;
 }
 function render(){
- const q=document.getElementById("search").value.toLowerCase();
- document.getElementById("albums").innerHTML=records.filter(a=>a[0].toLowerCase().includes(q)).map(a=>`
- <article class="card">
-  <div class="cover"><small>MASAYOSHI TAKANAKA</small><strong>${a[0]}</strong><small>${a[1]}</small></div>
-  <h3>${a[0]}</h3><div class="price">$10.00</div><p><button onclick="add(${JSON.stringify(a[0])})">ADD TO CART</button></p>
- </article>`).join("");
+ const q=document.getElementById('search').value.toLowerCase();
+ const filtered=records.filter(a=>a[0].toLowerCase().includes(q));
+ document.getElementById('albums').innerHTML=filtered.map(([name,year])=>`<article class="card"><div class="cover"><small>MASAYOSHI TAKANAKA</small><strong>${name}</strong><small>${year}</small></div><h3>${name}</h3><div class="price">$10.00</div><p><button type="button" class="add-button" data-name="${encodeURIComponent(name)}">ADD TO CART</button></p></article>`).join('');
 }
+document.getElementById('albums').addEventListener('click',event=>{
+ const button=event.target.closest('.add-button');
+ if(!button)return;
+ add(decodeURIComponent(button.dataset.name));
+ button.textContent='ADDED ✓';
+ setTimeout(()=>{if(button.isConnected)button.textContent='ADD TO CART';},900);
+});
+document.getElementById('cart').addEventListener('click',event=>{
+ const button=event.target.closest('button[data-action]');
+ if(!button)return;
+ const name=decodeURIComponent(button.dataset.name);
+ changeQty(name,button.dataset.action==='plus'?1:-1);
+});
+document.getElementById('search').addEventListener('input',render);
 render();updateCart();
 </script>
 </body>
